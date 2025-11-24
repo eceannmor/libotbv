@@ -145,10 +145,7 @@ void encode_recursive(const vector3<bool> &data, std::vector<bool> &encoding,
   if (0 == subvolume_size) {
     printf("%zu, %zu, %zu, %zu, %zu, %zu\n", xs, xe, ys, ye, zs, ze);
     throw std::invalid_argument(
-        "Encountered a subvolume with a size of 0 when encoding the volume. "
-        "This should never happen. Please open a new issue and attach the data "
-        "you are trying to encode. "
-        "https://github.com/eceannmor/otbv-cpp/issues");
+        "Encountered a subvolume with a size of 0 when encoding the volume.");
   }
   if (is_subvolume_homogeneous(data, xs, xe, ys, ye, zs, ze)) {
     // leaf
