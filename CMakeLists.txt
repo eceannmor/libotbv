@@ -24,11 +24,23 @@ install(TARGETS ${PROJECT_NAME}
 install(FILES ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pc
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
 
-add_executable(testing tests/tests.cpp)
-target_link_libraries(testing PRIVATE ${PROJECT_NAME})
-
+    
 if(PROJECT_IS_TOP_LEVEL)
     include(CTest)
     enable_testing()
-    add_test(NAME testing COMMAND $<TARGET_FILE:testing>)
+    
+    
+    set (TestList
+        tests/endtoend.cpp
+    )
+    
+    create_test_sourcelist( Tests tests.cpp ${TestList})
+    add_executable(testing ${Tests})
+    
+    foreach (test ${TestList})
+        get_filename_component (TName ${test} NAME_WE)
+        add_test (NAME ${TName} COMMAND testing tests/${TName})
+    endforeach ()
+
+    target_link_libraries(testing PRIVATE ${PROJECT_NAME})
 endif()

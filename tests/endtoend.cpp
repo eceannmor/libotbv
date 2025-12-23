@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-int main() {
+int tests_endtoend(int argc, char** argv) {
   const std::string filename = "test_file.otbv";
   std::vector<bool> data = {
       0, 0, 0, 1, 1, 0, 1, 1, 1, //
@@ -25,4 +25,5 @@ int main() {
       }
     }
   }
+  return 0;
 }
